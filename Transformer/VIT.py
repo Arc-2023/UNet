@@ -1,5 +1,5 @@
 import torch
-from Trocr.Trans.Encoder import *
+from MyTrU.Transformer.Encoder import *
 from rich import console
 
 console = console.Console()
@@ -13,10 +13,8 @@ class VIT(nn.Module):
         self.patch_d = patch_d
         self.in_channels = in_channels
         self.token_d = in_channels * (patch_d ** 2)
-        self.token_num = (img_y // patch_d) * (img_x // patch_d)
-
-        self.pos_emb = nn.Parameter(
-            torch.randint(low=0, high=5, size=(self.token_num, emb_d), device=device).float())
+        self.token_num = int((img_y // patch_d) * (img_x // patch_d))
+        self.pos_emb = nn.Parameter(torch.randint(low=0, high=5, size=(self.token_num, emb_d), device=device).float())
         nn.init.xavier_normal_(self.pos_emb)
 
         self.encoder = Encoder(block_size, mlp_d, head_num, emb_d, dropout)
@@ -38,6 +36,7 @@ class VIT(nn.Module):
         # img = torch.cat([cls, img], dim=1)
         # console.log(img.shape)
         # console.log(self.pos_emb.shape)
+
         img += self.pos_emb
         # img = self.pos_emb(img)
         img = self.drop_layer(img)
