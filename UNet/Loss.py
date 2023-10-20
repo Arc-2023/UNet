@@ -5,6 +5,7 @@ from torch import nn
 
 def dice_loss(pred, target):
     pred = torch.sigmoid(pred)
+    target = torch.sigmoid(target)
 
     pred = pred.contiguous().view(-1)
     target = target.contiguous().view(-1)

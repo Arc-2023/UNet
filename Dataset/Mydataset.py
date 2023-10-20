@@ -8,15 +8,15 @@ from torchvision import transforms as F
 from rich.console import Console
 
 console = Console()
+transs = F.Compose([
+    F.ToTensor(),
+    # F.Normalize(0.5, 0.5),
+    F.Resize((256, 256)),
+    F.ConvertImageDtype(torch.float),
+])
 
 
 def trans(x):
-    transs = F.Compose([
-        F.ToTensor(),
-        F.Normalize(0.5, 0.5),
-        F.Resize((256, 256)),
-        F.ConvertImageDtype(torch.float),
-    ])
     return transs(x)
 
 

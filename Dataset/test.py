@@ -24,9 +24,9 @@ def show_nii(path):
     # ii = rearrange(ii, 'h w c->c h w')
     ii = trans(ii)
     console.log(f'size:{ii.shape}')
-    console.log(ii[3, 100, :])
-    plt.imshow(ii[10, :, :])
+    # console.log(ii[3, 100, :])
+    plt.imshow(ii[1, :, :])
     plt.show()
 
 
-show_nii(r'C:\Users\CUI\Desktop\JETB\AI\MyTrU\Dataset\data\imgs\DET0000101_avg.nii.gz')
+show_nii(r'C:\Users\CUI\Desktop\JETB\AI\MyTrU\Dataset\data\lables\DET0003101_avg_seg.nii.gz')
